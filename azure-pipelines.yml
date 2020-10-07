@@ -29,6 +29,5 @@ stages:
       - task: Docker@2
         displayName: 'run data fabric image'
         inputs:
-          command: echo whoami
-          command: run
-          arguments: '--rm -v $(Build.SourcesDirectory):/provision deployment/core:0.1.0-TRAINING –sourceDir provision –skipUpload /bin/bash'
+          command: whoami
+
