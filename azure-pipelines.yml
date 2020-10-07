@@ -1,21 +1,32 @@
 trigger:
 - main
 
-pool:
-  vmImage: 'Ubuntu-16.04'
 
-steps:
-- task: Docker@2
-  displayName: 'fraxses registry login'
-  inputs:
-    containerRegistry: 'fraxses-registry'
-    command: login
-    arguments: --username alexb --password Braveshoosiers41
-- task: Docker@2
-  displayName: 'run data fabric image'
-  inputs:
-    containerRegistry: 'fraxses-registry'
-    command: run
-    image: deployment/core:0.1.0-TRAINING
-    endpoint: 'fraxses-registry'
-    arguments: '--rm -v $(Build.SourcesDirectory):/provision deployment/core:0.1.0-TRAINING –sourceDir provision   –skipUpload /bin/bash'
+stages:
+- stage: Test
+  displayName: Testing Image
+  jobs:  
+  - job: Test_Login
+    displayName: Test Image
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: Docker@2
+      displayName: 'fraxses registry login'
+      inputs:
+        containerRegistry: 'fraxses-registry'
+        command: login
+    
+  - job: Run Data Fabric Image
+      dependsOn: ['Test_Login']
+      pool:
+        vmImage: 'ubuntu-latest'
+      container: 
+        image: deployment/core:0.1.0-TRAINING
+        endpoint: 'fraxses-registry'
+      steps:
+        - task: Docker@2
+        displayName: 'run data fabric image'
+        inputs:
+          command: run
+          arguments: '--rm -v $(Build.SourcesDirectory):/provision deployment/core:0.1.0-TRAINING –sourceDir provision   –skipUpload /bin/bash'
