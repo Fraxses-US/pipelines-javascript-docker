@@ -8,7 +8,7 @@ steps:
 - task: Docker@2
   displayName: 'fraxses registry login'
   inputs:
-    containerRegistry: 'registry'
+    containerRegistry: 'fraxses-registry'
     command: login
 - task: Docker@2
   displayName: 'run data fabric image'
