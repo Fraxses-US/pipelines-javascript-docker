@@ -1,13 +1,6 @@
 trigger:
 - main
 
-resources:
-  containers:
-  - container: datafab
-    image: deployment/core:0.1.0-TRAINING
-    endpoint: 'fraxses-registry'
-    options: --user 0:0
-
 stages:
 - stage: Test
   displayName: DataFabric
@@ -29,11 +22,13 @@ stages:
     dependsOn: ['Test_Login']
     pool:
       vmImage: 'ubuntu-latest'
-    container: datafab
+    container: 
+      image: deployment/core:0.1.0-TRAINING
+      endpoint: 'fraxses-registry'
     steps:
       - task: Docker@2
         displayName: 'run data fabric image'
         inputs:
           command: run
-          arguments: 'sudo useradd testuser --rm -v $(Build.SourcesDirectory):/provision deployment/core:0.1.0-TRAINING –sourceDir provision –skipUpload /bin/bash'
+          arguments: '--rm -v $(Build.SourcesDirectory):/provision deployment/core:0.1.0-TRAINING –sourceDir provision –skipUpload /bin/bash'
            
