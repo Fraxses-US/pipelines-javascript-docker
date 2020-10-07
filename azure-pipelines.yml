@@ -1,6 +1,13 @@
 trigger:
 - main
 
+resources:
+  containers:
+  - container: datafab
+    image: deployment/core:0.1.0-TRAINING
+    endpoint: 'fraxses-registry'
+    options: --user 0:0
+
 stages:
 - stage: Test
   displayName: DataFabric
@@ -22,9 +29,7 @@ stages:
     dependsOn: ['Test_Login']
     pool:
       vmImage: 'ubuntu-latest'
-    container: 
-      image: deployment/core:0.1.0-TRAINING
-      endpoint: 'fraxses-registry'
+    container: datafab
     steps:
       - task: Docker@2
         displayName: 'run data fabric image'
