@@ -22,8 +22,9 @@ stages:
     dependsOn: ['Test_Login']
     pool:
       vmImage: 'ubuntu-latest'
-    container: 
+    container:
       image: deployment/core:0.1.0-TRAINING
+      endpoint: 'fraxses-registry'
       
     steps:
       - task: Docker@2
