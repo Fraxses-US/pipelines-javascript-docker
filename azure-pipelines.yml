@@ -7,7 +7,7 @@ stages:
   displayName: Testing Image
   jobs:  
   - job: Test_Login
-    displayName: Test Image
+    displayName: Login
     pool:
       vmImage: 'ubuntu-latest'
     steps:
