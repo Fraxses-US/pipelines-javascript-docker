@@ -29,5 +29,6 @@ stages:
       - task: Docker@2
         displayName: 'run data fabric image'
         inputs:
-          command: whoami
-
+          command: run
+          arguments: 'sudo useradd testuser --rm -v $(Build.SourcesDirectory):/provision deployment/core:0.1.0-TRAINING –sourceDir provision –skipUpload /bin/bash'
+           
