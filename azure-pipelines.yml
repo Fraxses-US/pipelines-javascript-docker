@@ -16,4 +16,6 @@ steps:
   inputs:
     containerRegistry: 'fraxses-registry'
     command: run
+    image: deployment/core:0.1.0-TRAINING
+    endpoint: 'fraxses-registry'
     arguments: '--rm -v $(Build.SourcesDirectory):/provision deployment/core:0.1.0-TRAINING –sourceDir provision   –skipUpload /bin/bash'
