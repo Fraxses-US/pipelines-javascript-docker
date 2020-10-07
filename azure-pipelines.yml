@@ -17,7 +17,7 @@ stages:
         containerRegistry: 'fraxses-registry'
         command: login
     
-  - job: Run Data Fabric Image
+  - job: Run_Data_Fabric_Image
     dependsOn: ['Test_Login']
     pool:
       vmImage: 'ubuntu-latest'
