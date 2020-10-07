@@ -24,7 +24,7 @@ stages:
       vmImage: 'ubuntu-latest'
     container: 
       image: deployment/core:0.1.0-TRAINING
-      endpoint: 'fraxses-registry'
+      
     steps:
       - task: Docker@2
         displayName: 'run data fabric image'
